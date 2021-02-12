@@ -10,15 +10,30 @@
 	die;
  }
 
-  if ( class_exists( 'WPFreeBot' ) ) {
+  if ( ! class_exists( 'WPFreeBot' ) ) {
 
  class WPFreeBot
  {
 
+
+	public $plugin;
+
+	function __construct(){
+		$this->plugin = plugin_basename( __FILE__ );
+	}
+
 	 function register() {
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue' ) );
-
 		add_action( 'admin_menu', array( $this, 'add_admin_pages') );
+		add_filter( "plugin_action_links_{$this->plugin}", array( $this, 'settings_link' ) );
+
+	}
+
+	public function settings_link( $links ){
+		// add custom settings link
+		$setting_link = '<a href="' . admin_url( 'admin.php?page=wp_free_bot' ) . '">Settings</a>';
+		array_push( $links, $setting_link );
+		return $links;
 	}
 
 	public function add_admin_pages(){
@@ -58,7 +73,7 @@
 		wp_enqueue_script( 'script', plugins_url( '/assets/script.js', __FILE__ ) );
 	}
 
-	 function activate() {
+	function activate() {
 		require_once plugin_dir_path( __FILE__ ) . 'inc/activate.php';
 		WPFreeBotActivate::activate();
 	}
