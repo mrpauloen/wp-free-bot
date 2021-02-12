@@ -1,6 +1,6 @@
 <?php
 /**
- * @package  AlecadddPlugin
+ * 
  */
 
 class WPFreeBotActivate
