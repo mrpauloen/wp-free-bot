@@ -14,89 +14,10 @@ if ( file_exists( dirname( __FILE__ ) . '/vendor/autoload.php' ) ) {
 	require_once dirname( __FILE__ ) . '/vendor/autoload.php';
 }
 
-use Inc\Activate;
-use Inc\Deactivate;
-use Inc\Admin\AdminPages;
-
-  if ( ! class_exists( 'WPFreeBot' ) ) {
-
- class WPFreeBot
- {
+define( 'PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
+define( 'PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 
 
-	public $plugin;
-
-	function __construct(){
-		$this->plugin = plugin_basename( __FILE__ );
-		//echo  dirname( __FILE__ ) . '/vendor/autoload.php';
-	}
-
-	 function register() {
-		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue' ) );
-		add_action( 'admin_menu', array( $this, 'add_admin_pages') );
-		add_filter( "plugin_action_links_{$this->plugin}", array( $this, 'settings_link' ) );
-
-	}
-
-	public function settings_link( $links ){
-		// add custom settings link
-		$setting_link = '<a href="' . admin_url( 'admin.php?page=wp_free_bot' ) . '">Settings</a>';
-		array_push( $links, $setting_link );
-		return $links;
-	}
-
-	public function add_admin_pages(){
-		add_menu_page(
-			'WPFreeBot',
-			'WP Free Bot',
-			'manage_options',
-			'wp_free_bot',
-			array( $this, 'admin_index' ),
-			'dashicons-buddicons-replies',
-			6
-		);
-	}
-
-	public function admin_index(){
-		require_once plugin_dir_path( __FILE__ ) . 'templates/admin.php';
-
-	}
-
-	protected function create_post_type() {
-		add_action( 'init', array( $this, 'custom_post_type' ) );
-	}
-
-	 function custom_post_type(){
-
-		 $args = array(
-			'public' => true,
-			'label' => 'Newsletter',
-			'menu_icon' => 'dashicons-bell',
-		 );
-		 register_post_type( 'newsletter', $args );
-	 }
-
-	function enqueue() {
-		// enqueue all our scripts
-		wp_enqueue_style( 'style', plugins_url( '/assets/style.css', __FILE__ ) );
-		wp_enqueue_script( 'script', plugins_url( '/assets/script.js', __FILE__ ) );
-	}
-
-	function activate() {
-		//require_once plugin_dir_path( __FILE__ ) . 'inc/activate.php';
-		Activate::activate();
-	}
- }
-
-
-	 $wpFreeBot = new WPFreeBot();
-	 $wpFreeBot->register();
-
-
-	// activation
-	register_activation_hook( __FILE__, array( $wpFreeBot, 'activate' ) );
-
-	// deactivation
-	register_deactivation_hook( __FILE__, array( 'Deactivate', 'deactivate' ) );
-
+if ( class_exists( 'Inc\\Init') ){
+	Inc\Init::register_services();
 }

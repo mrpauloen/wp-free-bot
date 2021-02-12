@@ -7,5 +7,7 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',
-    'Inc\\Activate' => $baseDir . '/inc/Activate.php',
+    'Inc\\Base\\Activate' => $baseDir . '/inc/Base/Activate.php',
+    'Inc\\Base\\Deactivate' => $baseDir . '/inc/Base/Deactivate.php',
+    'Inc\\Pages\\AdminPages' => $baseDir . '/inc/Pages/AdminPages.php',
 );
