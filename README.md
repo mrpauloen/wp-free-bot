@@ -1,2 +1,2 @@
-# wp-free-bot
+# WP Free Bot
 Newsletter and autoresponder plugin
