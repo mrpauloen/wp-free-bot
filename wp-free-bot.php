@@ -10,6 +10,14 @@
 	die;
  }
 
+if ( file_exists( dirname( __FILE__ ) . '/vendor/autoload.php' ) ) {
+	require_once dirname( __FILE__ ) . '/vendor/autoload.php';
+}
+
+use Inc\Activate;
+use Inc\Deactivate;
+use Inc\Admin\AdminPages;
+
   if ( ! class_exists( 'WPFreeBot' ) ) {
 
  class WPFreeBot
@@ -20,6 +28,7 @@
 
 	function __construct(){
 		$this->plugin = plugin_basename( __FILE__ );
+		//echo  dirname( __FILE__ ) . '/vendor/autoload.php';
 	}
 
 	 function register() {
@@ -74,8 +83,8 @@
 	}
 
 	function activate() {
-		require_once plugin_dir_path( __FILE__ ) . 'inc/activate.php';
-		WPFreeBotActivate::activate();
+		//require_once plugin_dir_path( __FILE__ ) . 'inc/activate.php';
+		Activate::activate();
 	}
  }
 
@@ -84,11 +93,10 @@
 	 $wpFreeBot->register();
 
 
- // activation
+	// activation
 	register_activation_hook( __FILE__, array( $wpFreeBot, 'activate' ) );
 
 	// deactivation
-	require_once plugin_dir_path( __FILE__ ) . 'inc/deactivate.php';
-	register_deactivation_hook( __FILE__, array( 'WPFreeBotDeactivate', 'deactivate' ) );
+	register_deactivation_hook( __FILE__, array( 'Deactivate', 'deactivate' ) );
 
 }
