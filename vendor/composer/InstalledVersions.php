@@ -30,7 +30,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => '30834ddcf2a1c7a7a90a39343ad59547544e5b51',
+    'reference' => '7355e1929edb991f360754ed3c35bbfe296571a0',
     'name' => 'mrpauloen/wp-free-bot',
   ),
   'versions' => 
@@ -42,7 +42,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => '30834ddcf2a1c7a7a90a39343ad59547544e5b51',
+      'reference' => '7355e1929edb991f360754ed3c35bbfe296571a0',
     ),
   ),
 );
