@@ -1,0 +1,17 @@
+{
+    "name": "mrpauloen/wp-free-bot",
+    "description": "Autoresponder and newsteller plugin",
+    "type": "project",
+    "license": "GPL",
+    "authors": [
+        {
+            "name": "mrpauloen",
+            "email": "69369238+mrpauloen@users.noreply.github.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+	"autoload": {
+		"psr-4": {"Inc\\": "./inc"}
+	}
+}
